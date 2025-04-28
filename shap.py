@@ -1,3 +1,24 @@
+import shap
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Step 1: Create SHAP explainer (using the trained XGBoost model)
+explainer = shap.Explainer(voting_clf.named_estimators_['xgb'], X_train)
+
+# Step 2: Compute SHAP values for the test set
+shap_values = explainer(X_test)
+
+# Step 3: Plot Heatmap for SHAP values
+shap_values_array = shap_values.values  # Convert SHAP values to a numpy array
+sns.heatmap(shap_values_array, cmap="coolwarm", xticklabels=X_test.columns, yticklabels=None)
+plt.xlabel('Features')
+plt.ylabel('Samples')
+plt.title('SHAP Value Heatmap')
+plt.show()
+
+
+
+..........................
 # Step 8: Explainable AI (XAI) - SHAP for Model Interpretation
 
 # Install SHAP if not installed
