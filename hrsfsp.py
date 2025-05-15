@@ -70,6 +70,8 @@ pipeline = Pipeline(steps=[
 pipeline.fit(X, y)
 
 # Function to generate personalized health recommendations using the LLM with few-shot prompting
+# Function to generate personalized health recommendations using the LLM with few-shot prompting
+# Function to generate personalized health recommendations using the LLM with few-shot prompting
 def get_health_recommendation(user_data):
     # Few-shot examples to guide the LLM
     few_shot_examples = (
@@ -103,9 +105,22 @@ def get_health_recommendation(user_data):
         f"Height: {user_data['height']} cm\n"
         f"Weight: {user_data['weight']} kg\n"
         f"Steps taken today: {user_data['steps']}\n"
-        f"Activity type: {user_data['activity']}\n\n"
-        "What personalized health recommendations can you provide based on this information, including required activity, diet suggestions, and other health tips?"
+        f"Activity type: {user_data['activity']}\n"
+        f"Heart Rate: {user_data['hear_rate']} bpm\n"
+        f"Hydration Level: Assess hydration based on activity intensity\n"
+        f"Current Fatigue Level: Moderate (assume based on activity)\n\n"
+        "Please provide a general health recommendation first, followed by specific advice in the following areas:\n"
+        "- Dietary and nutritional recommendations based on activity intensity and calorie cost\n"
+        "- Exercise and activity recommendations tailored to current fitness level\n"
+        "- Hydration alerts based on exertion level\n"
+        "- Sleep recommendations based on physical burden\n"
+        "- Stress-reduction recommendations, particularly when abnormal physiological cues or increased fatigue are detected."
     )
+    
+    # Call the LLM with the prompt
+    response = model.invoke([{"role": "user", "content": prompt}])
+    return response.content
+
     
     # Call the LLM with the prompt
     response = model.invoke([{"role": "user", "content": prompt}])

@@ -1,0 +1,10 @@
+Flask
+Pillow
+langchain-core
+langchain-community
+langchain-openai
+openai
+requests
+python-dotenv  
+cryptography
+--index-url https://pypi.deere.com/simple
